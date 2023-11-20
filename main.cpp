@@ -44,7 +44,7 @@ int main () {
                                 break;
                             
                             case false:
-                                cout << "Wrong username or password!\nTry again\n";
+                                cout << "Wrong username or password! \n Try again \n ";
                                 *signFailPtr = true;
                                 break;
                         }
@@ -55,17 +55,43 @@ int main () {
                 break;
 
             case 2: //Sign up
+                {
+                    bool signUpSuccess = false;
 
-                cout<< "Sign up" << "\n";
+                    cout<< "Sign up" << "\n";
 
-                cout<< "Create username : ";
-                cin >> username;
+                    cout<< "Create username : ";
+                    cin >> username;
 
-                cout<< "Create password : ";
-                cin >> password;
+                    cout<< "Create password : ";
+                    cin >> password;
 
-                SignUp(username, password);
+                    signUpSuccess = SignUp(username, password);
 
+                    do {
+                        switch (signUpSuccess)
+                        {
+                        case true:
+                            break;    
+                        
+                        case false:
+                            cout<< "Username already in use" << "\n" << "Try again" << "\n";
+
+                            cout<< "Create username : ";
+                            cin >> username;
+
+                            cout<< "Create password : ";
+                            cin >> password;
+
+                            signUpSuccess = SignUp(username, password);
+
+                            break;
+                        }
+                    }
+                    while (!signUpSuccess);
+
+                    cout << "User " << username << " was created";
+                }
                 break;
 
             default:                                            //error

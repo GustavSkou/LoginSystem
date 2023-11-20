@@ -1,13 +1,23 @@
 #include <fstream>
+#include "username-checker.cpp"
 
-void SignUp(std::string username, std::string password){
+bool SignUp(std::string username, std::string password){
 
-    user newUser(&username, &password);
+    if (!isUsernameInUse(&username)) {
 
-    std::ofstream userFile(path + *newUser.username + ".txt");
+        user newUser(&username, &password);
 
-    userFile<< "username;" + *newUser.username << "\n" 
-            << "password;" + *newUser.password;
+        std::ofstream userFile(path + *newUser.username + ".txt");
 
-    userFile.close();
+        userFile<< "username;" + *newUser.username << "\n" 
+                << "password;" + *newUser.password;
+
+        userFile.close();
+
+        return true;
+    }
+    else {
+        
+        return false;
+    }
 }
